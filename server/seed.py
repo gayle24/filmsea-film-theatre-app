@@ -37,7 +37,7 @@ with app.app_context():
 
     # Create filmmakers
     filmmakers = []
-    for _ in range(5):  # You can adjust the number of filmmakers
+    for _ in range(10):
         filmmaker = Filmmaker(
             name=fake.name()
         )
@@ -46,15 +46,14 @@ with app.app_context():
 
     # Create theatres
     theatres = []
-    for _ in range(5):  # You can adjust the number of theatres
+    for _ in range(15):
         theatre = Theatre(
             name=fake.company(),
-            ticket_price=randint(10, 50)  # You can adjust ticket prices as needed
+            ticket_price=randint(350, 450)
         )
         theatres.append(theatre)
         db.session.add(theatre)
 
-    # Commit the filmmakers and theatres before creating films
     db.session.commit()
 
     # Create films
@@ -73,8 +72,7 @@ with app.app_context():
         )
         films.append(film)
         db.session.add(film)
-
-    # Commit the films
+        
     db.session.commit()
 
     print(f'Image URL: {fake.image_url()}')

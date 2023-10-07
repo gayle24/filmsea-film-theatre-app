@@ -58,6 +58,6 @@ class User(db.Model, SerializerMixin):
         self._password_hash = our_hash.decode('utf-8')
         # return(our_hash.decode('utf-8'))
 
-    def validatepassword(self, password):
-        is_valid = bcrypt.check_password_hash(self._password_hash,password.encode('utf-8'))
+    def validate_password(self, password):
+        is_valid = bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
         return is_valid
