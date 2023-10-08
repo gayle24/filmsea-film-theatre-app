@@ -4,11 +4,11 @@ from models import Filmmaker, Theatre, Film, User
 
 
 
-# @app.before_request
-# def check_valid_user():
-#     print(session.get('random_user'))
-#     if not session.get('random_user') and request.endpoint != "sign_up":
-#         return {"message": "You cannot access this route"}, 403
+@app.before_request
+def check_if_logged_in():
+    if not session['user_id'] \
+        and request.endpoint != 'signup' and request.endpoint != 'login':
+        return {'error': 'Unauthorized'}, 401
 
 @app.route('/')
 def index():
@@ -93,27 +93,8 @@ class FilmsByID(Resource):
             return {"error": "Missing 'tickets_available' in request data"}, 400
 api.add_resource(FilmsByID, '/films/<int:id>')
 
-class SignUp(Resource):
-    def post(self):
-        userData = request.get_json()
-        username = userData['username']
-        password = userData['password']
-
-        print(username, password)
-
-        new_user = User(username=username)
-        new_user.password_hash = password
-
-        db.session.add(new_user)
-        db.session.commit()
-        session['random_user'] = new_user.id
-
-        return {"message": "New user created"}, 201
-api.add_resource(SignUp, '/signup', endpoint='sign_up')
-
 class Login(Resource):
     def post(self):
-        # Get the login data from the request JSON
         login_data = request.get_json()
         username = login_data.get('username')
         password = login_data.get('password')
@@ -128,10 +109,38 @@ class Login(Resource):
         if not user.validate_password(password):
             return {"message": "Invalid password"}, 401
         
+        response_data = {
+            "message": "Login successful",
+            "user_id": user.id
+        }
+        
         session['user_id'] = user.id
-        return {"message": "Login successful"}, 200
+        return response_data, 200 
 
-api.add_resource(Login, '/login')
+api.add_resource(Login, '/login', endpoint='login')
+
+class SignUp(Resource):
+    def post(self):
+        userData = request.get_json()
+        username = userData['username']
+        password = userData['password']
+
+        new_user = User(username=username)
+        new_user.password_hash = password
+
+        db.session.add(new_user)
+        db.session.commit()
+        session['random_user'] = new_user.id
+        
+        response_data = {
+            "message": "New user created",
+            "user_id": new_user.id
+        }
+        
+        return response_data, 201
+
+api.add_resource(SignUp, '/signup', endpoint='signup')
+
 
 class Delete(Resource):
     pass
