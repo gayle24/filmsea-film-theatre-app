@@ -32,21 +32,27 @@ class Film(db.Model, SerializerMixin):
     image_url = db.Column(db.String)
     filmmaker_id = db.Column(db.Integer, db.ForeignKey('filmmakers.id'))
     theatre_id = db.Column(db.Integer, db.ForeignKey('theatres.id'))
+    # users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     duration = db.Column(db.Integer)
     screening_time = db.Column(db.DateTime)
     tickets_available = db.Column(db.Integer)
 
     filmmakers = db.relationship('Filmmaker', back_populates='films')
     theatres = db.relationship('Theatre', back_populates='films')
+    # users = db.relationship('User', back_populates='films')
     serialize_rules = ('-theatres.films',)
     serialize_rules = ('-filmmakers.films',)
+    # serialize_rules = ('-users.films',)
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)
+    # films = db.relationship('Film', back_populates='users')
     _password_hash = db.Column(db.String, nullable=False)
+
+    # serialize_rules = ('-films.users',)
 
     @hybrid_property
     def password_hash(self):

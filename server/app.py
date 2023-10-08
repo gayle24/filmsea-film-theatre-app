@@ -1,14 +1,17 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import make_response , jsonify, session, request
 from setup import app, Resource, api, db
 from models import Filmmaker, Theatre, Film, User
 
 
 
-@app.before_request
-def check_if_logged_in():
-    if not session['user_id'] \
-        and request.endpoint != 'signup' and request.endpoint != 'login':
-        return {'error': 'Unauthorized'}, 401
+# @app.before_request
+# def check_if_logged_in():
+#     if not session['user_id'] \
+#         and request.endpoint != 'signup' and request.endpoint != 'login':
+#         return {'error': 'Unauthorized'}, 401
 
 @app.route('/')
 def index():
@@ -93,6 +96,21 @@ class FilmsByID(Resource):
             return {"error": "Missing 'tickets_available' in request data"}, 400
 api.add_resource(FilmsByID, '/films/<int:id>')
 
+class Users(Resource):
+    def get(self, id):
+        user = User.query.filter_by(id=id).first()
+        if user:
+            response_dict = user.to_dict()
+            status_code = 200
+        else:
+          response_dict = {"error": "Film not found"}
+          status_code = 200
+        response = make_response(
+                jsonify(response_dict),
+                200
+            )
+        return response
+
 class Login(Resource):
     def post(self):
         login_data = request.get_json()
@@ -142,9 +160,29 @@ class SignUp(Resource):
 api.add_resource(SignUp, '/signup', endpoint='signup')
 
 
-class Delete(Resource):
-    pass
-api.add_resource(Delete, '/delete')
+class Logout(Resource):
+    def post(self):
+        if 'user_id' in session:
+            del session['user_id']
+            return {"message": "User session deleted"}, 200
+        else:
+            return {"message": "No user session to delete"}, 200
+api.add_resource(Logout, '/logout')
+
+class DeleteUser(Resource):
+    def delete(self):
+        if 'user_id' in session:
+            user_id = session['user_id']
+            user = User.query.get(user_id)
+            if user:
+                  db.session.delete(user)
+                  db.session.commit()
+                  return {"message": "User account deleted"}, 200
+            else:
+                  return {"error": "User not found"}, 404
+        else:
+            return {"error": "User not authenticated"}, 401
+api.add_resource(DeleteUser, '/delete')
 
 
 
