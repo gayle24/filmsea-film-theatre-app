@@ -5,7 +5,12 @@ from flask_migrate import Migrate
 from flask_restful import Api, Resource
 
 db = SQLAlchemy()
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../client/src',
+    template_folder='../client/src'
+)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///filmmaker_theatres.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
