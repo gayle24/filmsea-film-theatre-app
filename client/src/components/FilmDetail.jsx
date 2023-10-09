@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import '../App.css';
 
+
 function FilmDetail({ setInfo }) {
   const [film, setFilm] = useState(null);
   const [count, setCount] = useState(null);
@@ -55,7 +56,7 @@ function FilmDetail({ setInfo }) {
 
 
   return (
-    <section className="detail">
+    <section className="detail-card">
       {film ? (
         <>
           <img src={film.image_url} alt={film.name} className="film-image" />

@@ -19,9 +19,10 @@ function App() {
     <>
       <div className='topnav'>
         <span className='logo'> FilmSea </span>
-        <NavLink to={`/`}>Home</NavLink>
-        <NavLink to={`/clientfilms`}> FilmHub </NavLink>
-        <NavLink to={`/userprofile`}> Profile </NavLink>
+          <NavLink to={`/`}>Home</NavLink>
+          <NavLink to={`/clientfilms`}> FilmHub </NavLink>
+          <NavLink to={`/userprofile`}> Profile </NavLink>
+        
         
       </div>
       
