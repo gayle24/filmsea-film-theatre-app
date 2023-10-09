@@ -1,46 +1,21 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Seaweed+Script&display=swap');
+
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 6%;
+  padding: 1.5%;
   will-change: filter;
   transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  text-align: left;
+  font-size: 50px;
+  color: rgb(252, 200, 132);
+  font-family: 'Seaweed Script', cursive;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home Link {
+  color: rgb(190, 5, 190);
+  font-family: 'Seaweed Script', cursive;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 
 .film-list {
   display: flex;
@@ -94,4 +69,44 @@
 
 .book-ticket-button:hover {
   background-color: #1ac483ec;
+}
+
+.topnav {
+  align-items: stretch;
+  position: sticky;
+  width: 1400px;
+  height: 56px;
+  text-align: justify;
+}
+
+.start {
+  height: 100px;
+}
+
+.end {
+  height: 500px;
+}
+
+/* Style the links inside the navigation bar */
+.topnav NavLink {
+  float: left;
+  color: #f2f2f2;
+  text-align: right;
+  word-spacing: 26em;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 30px;
+  font-family: 'Bonheur Royale', cursive;
+}
+
+/* Change the color of links on hover */
+.topnav NavLink:hover {
+  background-color: #b3aeae;
+  color: white;
+}
+
+/* Add a color to the active/current link */
+.topnav NavLink.active {
+  background-color: #b3aeae;
+  color: white;
 }

@@ -55,7 +55,7 @@ function FilmDetail({ setInfo }) {
 
 
   return (
-    <section>
+    <section className="detail">
       {film ? (
         <>
           <img src={film.image_url} alt={film.name} className="film-image" />
