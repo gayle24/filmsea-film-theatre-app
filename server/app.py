@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask import make_response , jsonify, session, request
+from flask import make_response , jsonify, session, request, render_template
 from setup import app, Resource, api, db
 from models import Filmmaker, Theatre, Film, User
 
