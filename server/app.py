@@ -14,12 +14,9 @@ from models import Filmmaker, Theatre, Film, User
 #         return {'error': 'Unauthorized'}, 401
 
 @app.route('/')
-def index():
-    response = make_response(
-        '<h1>Welcome to the FilmSea backend directory!</h1>',
-        200
-    )
-    return response
+@app.route('/<int:id>')
+def home(id=0):
+    return render_template("index.html")
 
 class Filmmakers(Resource):
     def get(self):
