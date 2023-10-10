@@ -14,9 +14,8 @@ from models import Filmmaker, Theatre, Film, User
 #         return {'error': 'Unauthorized'}, 401
 
 @app.route('/')
-@app.route('/<int:id>')
-def home(id=0):
-    return render_template("index.html")
+def index():
+    return 'FilmSea Homepage'
 
 class Filmmakers(Resource):
     def get(self):
