@@ -15,6 +15,14 @@
 .home Link {
   color: rgb(190, 5, 190);
   font-family: 'Seaweed Script', cursive;
+  font-weight: bold;
+  font-style: oblique;
+}
+
+.home p{
+  color: rgb(187, 149, 98);
+  font-weight: bold;
+  font-size: 26px;
 }
 
 
@@ -127,4 +135,14 @@
 .topnav NavLink.active {
   background-color: #b3aeae;
   color: white;
+}
+
+.login div{
+  background-color: antiquewhite;
+  color: black;
+
+}
+
+.login input{
+  
 }

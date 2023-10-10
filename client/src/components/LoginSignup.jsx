@@ -1,8 +1,28 @@
 // LoginSignupPage.jsx
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import '../App.css';
 
+const respStyle = {
+  color: 'black'
+}
 
+const backgroundStyle = {
+  backgroundImage: `url('https://images.unsplash.com/photo-1600582910964-5b7c109e6868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJlYWNoJTIwc2FuZHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80')`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  height: '91vh',
+  width: 'auto', 
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'initial',
+  justifyContent: 'center',
+  color: 'white',
+  textAlign: 'center',
+  fontSize: '25px',
+  fontFamily: 'Arial, Helvetica, sans-serif',
+  fontStyle: 'italic',
+};
 
 function LoginSignupPage() {
   const [username, setUsername] = useState("");
@@ -63,7 +83,7 @@ function LoginSignupPage() {
   };
 
   return (
-    <div>
+    <div style={backgroundStyle} className="login">
       <h2>Login or Signup</h2>
       <div>
         <input
@@ -82,7 +102,7 @@ function LoginSignupPage() {
         <p>Or</p>
         <button onClick={handleSignup}>Signup</button>
       </div>
-      <p>{response}</p>
+      <p style={respStyle}>{response}</p>
     </div>
   );
 }

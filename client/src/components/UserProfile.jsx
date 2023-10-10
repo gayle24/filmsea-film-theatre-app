@@ -1,6 +1,23 @@
 import { useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 
+const backgroundStyle = {
+    backgroundImage: `url('https://images.hdqwalls.com/wallpapers/dream-beach-z1.jpg')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center', 
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'initial',
+    justifyContent: 'center',
+    color: 'white',
+    backgroundColor: 'white',
+    textAlign: 'center',
+    fontSize: '20px',
+    width: 'auto',
+    height: '91vh',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    fontStyle: 'italic',
+  };
 
 function User({ info }){
     const user_id = sessionStorage.getItem("user_id");
@@ -20,7 +37,7 @@ function User({ info }){
 
 
     return (
-    <div>
+    <div style={backgroundStyle}>
         <h3>Welcome to your User Profile Page</h3>
         <p>Booked Tickets:</p>
         {info && (
