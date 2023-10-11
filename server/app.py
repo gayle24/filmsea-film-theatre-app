@@ -1,11 +1,22 @@
-from dotenv import load_dotenv
-load_dotenv()
-
 from flask import make_response , jsonify, session, request, render_template
 from setup import app, Resource, api, db
 from models import Filmmaker, Theatre, Film, User
 
+from dotenv import load_dotenv
+load_dotenv()
 
+import os  # Import os here
+
+# ...
+
+flask_env = os.environ.get("FLASK_ENV")
+
+if flask_env == "production":
+    # Configure your app for production
+    app.config["DEBUG"] = False
+else:
+    # Configure your app for development
+    app.config["DEBUG"] = True
 
 # @app.before_request
 # def check_if_logged_in():
@@ -15,7 +26,8 @@ from models import Filmmaker, Theatre, Film, User
 
 @app.route('/')
 def index():
-    return 'FilmSea Homepage'
+    return render_template('index.html')
+
 
 class Filmmakers(Resource):
     def get(self):
@@ -85,7 +97,7 @@ class FilmsByID(Resource):
                 # Update the 'tickets_available' attribute of the film
                 film.tickets_available = int(data['tickets_available'])
                 db.session.commit()
-                return {"message": "Tickets available updated successfully"}, 200
+                return film.to_dict(), 200
             except ValueError:
                 return {"error": "Invalid 'tickets_available' value"}, 400
         else:

@@ -21,10 +21,10 @@ function FilmList() {
   const user_id = sessionStorage.getItem("user_id");
 
     if (!user_id) {
-      return <Link to = '/login'>Login or Signup to proceed</Link>
+      return <Link to = '/clientlogin'>Login or Signup to proceed</Link>
     } else {
     useEffect(() => {  
-    fetch(`/api/films`)
+    fetch(`/films`)
       .then((response) => {
         if (response.ok) {
           return response.json();

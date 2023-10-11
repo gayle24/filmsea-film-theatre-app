@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
       proxy: {
         '/api': {
-          target: 'https://film-theatres-web.onrender.com/',
+          target: 'https://127',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },

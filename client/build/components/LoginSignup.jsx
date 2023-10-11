@@ -31,7 +31,7 @@ function LoginSignupPage() {
   
 
   const handleLogin = () => {
-    fetch("/api/login", {
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -8,9 +8,10 @@ db = SQLAlchemy()
 app = Flask(
     __name__,
     static_url_path='',
-    static_folder='../client/src',
-    template_folder='../client/src'
+    static_folder='../client/dist',
+    template_folder='../client/dist'
 )
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///filmmaker_theatres.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

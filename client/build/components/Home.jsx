@@ -26,7 +26,7 @@ function Home() {
           <p>
             Dive into a sea of breathtaking films
           </p>
-          <Link to="/clientfilms"><bold>Explore Films</bold></Link>
+          <Link to="/clientfilms">Explore Films</Link>
         </div>
       </div>
     );

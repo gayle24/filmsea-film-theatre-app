@@ -20,10 +20,13 @@ const backgroundStyle = {
   };
 
 function User({ info }){
+    console.log('xxxxxxxxxx');
+    console.log(info);
+    console.log('yyyyyyyyyy');
     const user_id = sessionStorage.getItem("user_id");
     if (!user_id) {
-      <Navigate to ='/login' replace = '/' />
-      return <Link to = '/login'>Login or Signup to Proceed</Link>
+      <Navigate to ='/clientlogin' replace = '/' />
+      return <Link to = '/clientlogin'>Login or Signup to Proceed</Link>
     } else {
 
     // add logout code here with a button for logging out and on clicking

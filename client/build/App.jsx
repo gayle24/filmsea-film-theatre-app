@@ -1,5 +1,5 @@
 import { Route, Routes, Link, NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Home from './components/Home';
 import FilmDetail from './components/FilmDetail';
@@ -16,6 +16,21 @@ function App() {
     duration: null
   });
 
+  function handleInfo(params){
+    alert('data')
+    console.log('butter');
+    let newInfo = {name: params.name, theatre: params.theatre, 
+    screening_time: params.screening_time, duration: params.duration};
+    console.log(newInfo);
+    setInfo(newInfo);
+    console.log('butter');
+  }
+  
+  useEffect(()=>{
+    console.log('xxxxxxxxxx');
+    console.log(info);
+    console.log('yyyyyyyyyy')
+  }, [info]);
   return (
     <>
       <div className='topnav'>
@@ -29,10 +44,10 @@ function App() {
       </div>
       
       <Routes>
-          <Route path="/login" element={<LoginSignup />} />
+          <Route path="/clientlogin" element={<LoginSignup />} />
           <Route path="/clientfilms" element={<FilmList />} />
-          <Route onInfo={setInfo} path="/clientfilms/:id" element={<FilmDetail />} />
-          <Route info={info} path="/userprofile" element={<User />} />
+          <Route path="/clientfilms/:id" element={<FilmDetail onInfo={handleInfo}/>} />
+          <Route path="/userprofile" element={<User info={info}/>} />
           <Route path="/contact" element={<Contact />} />
         <Route path="/" element={<Home />} />
       </Routes>

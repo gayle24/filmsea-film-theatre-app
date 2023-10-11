@@ -1,35 +1,38 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
+
 import '../App.css';
 
-
-function FilmDetail({ setInfo }) {
+function FilmDetail({onInfo}) {
   const [film, setFilm] = useState(null);
   const [count, setCount] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate()
   const user_id = sessionStorage.getItem("user_id");
+
+  const [ticketBooked, setTicketBooked] = useState(true);
   
   
     if (!user_id) {
-      <Navigate to ='/login' replace = '/' />
-      return <Link to = '/login'>Login or Signup to Proceed</Link>
+      navigate('/clientlogin')
+      // return <Link to = '/clientlogin'>Login or Signup to Proceed</Link>
     } else {
     useEffect(() => {
-    fetch(`/api/films/${id}`)
+    fetch(`/films/${id}`)
       .then((r) => r.json())
       .then((filmData) => {
         setFilm(filmData);
-        console.log(filmData);
+        // console.log(filmData);
         if (filmData != null) {
           setCount(filmData.tickets_available)
         }
       });
-  }, [id]);
+  }, [id, ticketBooked]);
 }
 
   const handleClick = () => {
     if (count !== 0) {
-      fetch(`/api/films/${id}`, {
+      fetch(`/films/${id}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
@@ -43,11 +46,16 @@ function FilmDetail({ setInfo }) {
       })
         .then((response) =>response.json())
         .then((data) =>{
+          console.log('butter');
           console.log(data);
+          console.log('butter');
           // Update the film state with the new data received
-          location.reload();
-          setInfo({name: data.name, theatre: data.theatres.name, 
-            screening_time: data.screening_time, duration: data.duration})
+          setTicketBooked(!ticketBooked)
+          console.log('info');
+          let passedInfo = ({name: data.name, theatre: data.theatres.name, 
+            screening_time: data.screening_time, duration: data.duration});
+          onInfo(passedInfo)
+          console.log('info');
           setCount(data.tickets_available);
         });
     }
