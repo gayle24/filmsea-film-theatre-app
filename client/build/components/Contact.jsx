@@ -27,7 +27,7 @@ export default function Contact(){
         return <Link to = '/login'>Login or Signup to proceed</Link>
       } else {
       useEffect(() => {  
-      fetch(`/api/theatres`)
+      fetch(`/theatres`)
         .then((response) => {
           if (response.ok) {
             return response.json();
